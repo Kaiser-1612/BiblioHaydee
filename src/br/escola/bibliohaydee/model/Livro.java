@@ -9,6 +9,7 @@ public class Livro {
     boolean disponibilidade;
 
     public Livro(String tituloLivro, int isbnId, Autor autorLivro, int anoDePublicacaoLivro, String generoLivro) {
+
         titulo = tituloLivro;
         isbn = isbnId;
         autor = autorLivro;
@@ -16,7 +17,9 @@ public class Livro {
         genero = generoLivro;
         disponibilidade = true;
     }
-
+    public Livro(String tituloLivro, int isbnId, Autor autorLivro, int anoDePublicacaoLivro){
+        this(tituloLivro, isbnId, autorLivro, anoDePublicacaoLivro,"Não informado");
+    }
     @Override
     public String toString() {
         return "Nome livro: " + titulo + " - " + autor;

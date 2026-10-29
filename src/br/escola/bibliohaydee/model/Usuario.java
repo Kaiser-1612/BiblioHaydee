@@ -1,13 +1,14 @@
 package br.escola.bibliohaydee.model;
 
 public class Usuario {
+    public static final int LIMITE_PADRAO = 3;
     private String nome;
     private String matricula;
     private String tipo;
     private Integer limiteEmprestimo;
     private Integer emprestimosAtivos;
 
-    public Usuario(String nomeEntrada, String matriculaEntrada, String tipoEntrada, Integer limiteEmprestimoEntrada) throws IllegalAccessException {
+    public Usuario(String nomeEntrada, String matriculaEntrada, String tipoEntrada, Integer limiteEmprestimoEntrada) {
         if (nomeEntrada == null || nomeEntrada.trim().isEmpty()) {
             throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
         }
@@ -22,6 +23,7 @@ public class Usuario {
 
         emprestimosAtivos = 0;
     }
+
   public String getNome() {
     return nome;
   }
@@ -37,4 +39,21 @@ public class Usuario {
   public Integer getEmprestimosAtivos() {
         return emprestimosAtivos;
   }
+    public Usuario(String nome, String matricula, String tipo) {
+        this(nome, matricula, tipo, LIMITE_PADRAO);
+    }
+    public boolean setNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return false;
+        }
+        this.nome = nome.trim();
+        return true;
+    }
+    public boolean setLimiteEmprestimo(int limiteEmprestimo) {
+        if (limiteEmprestimo < 1) {
+            return false;
+        }
+        this.limiteEmprestimo = limiteEmprestimo;
+        return true;
+    }
 }
