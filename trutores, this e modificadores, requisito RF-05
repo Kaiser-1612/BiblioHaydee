@@ -1,0 +1,95 @@
+[1mdiff --git a/src/br/escola/bibliohaydee/app/Main.java b/src/br/escola/bibliohaydee/app/Main.java[m
+[1mindex fb080f5..c55b596 100644[m
+[1m--- a/src/br/escola/bibliohaydee/app/Main.java[m
+[1m+++ b/src/br/escola/bibliohaydee/app/Main.java[m
+[36m@@ -8,13 +8,13 @@[m [mimport java.util.Scanner;[m
+ public class Main {[m
+     public static void main(String[] args) {[m
+         var scanner = new Scanner(System.in);[m
+[31m-        System.out.print("Digite o nome do autor");[m
+[32m+[m[32m        System.out.print("Digite o nome do autor:");[m
+         String nomeAutor = scanner.nextLine();[m
+ [m
+[31m-        System.out.print("Digite a nacionalidade do autor");[m
+[32m+[m[32m        System.out.print("Digite a nacionalidade do autor:");[m
+         String nacionalidade = scanner.nextLine();[m
+ [m
+[31m-        System.out.print("Digite o ano de nascimente do autor");[m
+[32m+[m[32m        System.out.print("Digite o ano de nascimente do autor:");[m
+         int anoNascimente = scanner.nextInt();[m
+ [m
+         Autor autor = new Autor(nomeAutor, nacionalidade, anoNascimente);[m
+[1mdiff --git a/src/br/escola/bibliohaydee/model/Livro.java b/src/br/escola/bibliohaydee/model/Livro.java[m
+[1mindex 404eeb6..cc2e32d 100644[m
+[1m--- a/src/br/escola/bibliohaydee/model/Livro.java[m
+[1m+++ b/src/br/escola/bibliohaydee/model/Livro.java[m
+[36m@@ -9,6 +9,7 @@[m [mpublic class Livro {[m
+     boolean disponibilidade;[m
+ [m
+     public Livro(String tituloLivro, int isbnId, Autor autorLivro, int anoDePublicacaoLivro, String generoLivro) {[m
+[32m+[m
+         titulo = tituloLivro;[m
+         isbn = isbnId;[m
+         autor = autorLivro;[m
+[36m@@ -16,7 +17,9 @@[m [mpublic class Livro {[m
+         genero = generoLivro;[m
+         disponibilidade = true;[m
+     }[m
+[31m-[m
+[32m+[m[32m    public Livro(String tituloLivro, int isbnId, Autor autorLivro, int anoDePublicacaoLivro){[m
+[32m+[m[32m        this(tituloLivro, isbnId, autorLivro, anoDePublicacaoLivro,"Não informado");[m
+[32m+[m[32m    }[m
+     @Override[m
+     public String toString() {[m
+         return "Nome livro: " + titulo + " - " + autor;[m
+[1mdiff --git a/src/br/escola/bibliohaydee/model/Usuario.java b/src/br/escola/bibliohaydee/model/Usuario.java[m
+[1mindex 5362183..3c3054a 100644[m
+[1m--- a/src/br/escola/bibliohaydee/model/Usuario.java[m
+[1m+++ b/src/br/escola/bibliohaydee/model/Usuario.java[m
+[36m@@ -1,13 +1,14 @@[m
+ package br.escola.bibliohaydee.model;[m
+ [m
+ public class Usuario {[m
+[32m+[m[32m    public static final int LIMITE_PADRAO = 3;[m
+     private String nome;[m
+     private String matricula;[m
+     private String tipo;[m
+     private Integer limiteEmprestimo;[m
+     private Integer emprestimosAtivos;[m
+ [m
+[31m-    public Usuario(String nomeEntrada, String matriculaEntrada, String tipoEntrada, Integer limiteEmprestimoEntrada) throws IllegalAccessException {[m
+[32m+[m[32m    public Usuario(String nomeEntrada, String matriculaEntrada, String tipoEntrada, Integer limiteEmprestimoEntrada) {[m
+         if (nomeEntrada == null || nomeEntrada.trim().isEmpty()) {[m
+             throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");[m
+         }[m
+[36m@@ -22,6 +23,7 @@[m [mpublic class Usuario {[m
+ [m
+         emprestimosAtivos = 0;[m
+     }[m
+[32m+[m
+   public String getNome() {[m
+     return nome;[m
+   }[m
+[36m@@ -37,4 +39,21 @@[m [mpublic class Usuario {[m
+   public Integer getEmprestimosAtivos() {[m
+         return emprestimosAtivos;[m
+   }[m
+[32m+[m[32m    public Usuario(String nome, String matricula, String tipo) {[m
+[32m+[m[32m        this(nome, matricula, tipo, LIMITE_PADRAO);[m
+[32m+[m[32m    }[m
+[32m+[m[32m    public boolean setNome(String nome) {[m
+[32m+[m[32m        if (nome == null || nome.trim().isEmpty()) {[m
+[32m+[m[32m            return false;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        this.nome = nome.trim();[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    }[m
+[32m+[m[32m    public boolean setLimiteEmprestimo(int limiteEmprestimo) {[m
+[32m+[m[32m        if (limiteEmprestimo < 1) {[m
+[32m+[m[32m            return false;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        this.limiteEmprestimo = limiteEmprestimo;[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    }[m
+ }[m
+\ No newline at end of file[m
